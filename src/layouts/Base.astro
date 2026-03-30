@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'vNext Labs — Product development, technical leadership, and AI.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <a href="/" class="site-name">vNext Labs</a>
+        <nav>
+          <a href="/projects">Projects</a>
+          <a href="/services">Services</a>
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer>
+        <p>&copy; {new Date().getFullYear()} vNext Labs</p>
+      </footer>
+    </div>
+  </body>
+</html>
