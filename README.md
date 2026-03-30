@@ -1,10 +1,21 @@
-# vNextLabs Site
+# vNext Labs Site
 
-The official website for vNextLabs.
+The official website for [vnextlabs.dev](https://vnextlabs.dev).
 
-## Getting Started
+Built with [Astro](https://astro.build), plain CSS, and deployed to GitHub Pages.
 
-_Coming soon._
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
 
 ## License
 
