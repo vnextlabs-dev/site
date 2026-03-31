@@ -40,7 +40,41 @@ const {
       </main>
       <footer>
         <p>&copy; {new Date().getFullYear()} vNext Labs</p>
+        <span class="footer-dot">⏺</span>
+        <div class="theme-switcher">
+          <a href="#" data-theme-choice="auto" class="theme-option active">auto</a>
+          <span class="pipe">|</span>
+          <a href="#" data-theme-choice="dark" class="theme-option">dark</a>
+          <span class="pipe">|</span>
+          <a href="#" data-theme-choice="light" class="theme-option">light</a>
+        </div>
       </footer>
     </div>
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem('theme') || 'auto';
+        apply(stored);
+
+        document.querySelectorAll('.theme-option').forEach(function (el) {
+          el.addEventListener('click', function (e) {
+            e.preventDefault();
+            var choice = this.getAttribute('data-theme-choice');
+            apply(choice);
+            localStorage.setItem('theme', choice);
+          });
+        });
+
+        function apply(choice) {
+          if (choice === 'auto') {
+            document.documentElement.removeAttribute('data-theme');
+          } else {
+            document.documentElement.setAttribute('data-theme', choice);
+          }
+          document.querySelectorAll('.theme-option').forEach(function (el) {
+            el.classList.toggle('active', el.getAttribute('data-theme-choice') === choice);
+          });
+        }
+      })();
+    </script>
   </body>
 </html>
