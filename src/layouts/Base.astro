@@ -25,12 +25,22 @@ const {
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          if (stored === 'dark' || stored === 'light') {
+            document.documentElement.setAttribute('data-theme', stored);
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div class="page">
       <header>
         <a href="/" class="site-name">vNext Labs</a>
-        <nav>
+        <nav aria-label="Primary">
           <a href="/projects">Projects</a>
           <a href="/services">Services</a>
           <a href="/connect">Connect</a>
@@ -41,29 +51,32 @@ const {
       </main>
       <footer>
         <p>&copy; {new Date().getFullYear()} vNext Labs</p>
-        <span class="footer-dot">⏺</span>
-        <div class="theme-switcher">
-          <a href="#" data-theme-choice="auto" class="theme-option active">auto</a>
-          <span class="pipe">|</span>
-          <a href="#" data-theme-choice="dark" class="theme-option">dark</a>
-          <span class="pipe">|</span>
-          <a href="#" data-theme-choice="light" class="theme-option">light</a>
+        <span class="footer-dot" aria-hidden="true">⏺</span>
+        <div class="theme-switcher" role="group" aria-label="Theme">
+          <button type="button" data-theme-choice="auto" class="theme-option" aria-pressed="true">auto</button>
+          <span class="pipe" aria-hidden="true">|</span>
+          <button type="button" data-theme-choice="dark" class="theme-option" aria-pressed="false">dark</button>
+          <span class="pipe" aria-hidden="true">|</span>
+          <button type="button" data-theme-choice="light" class="theme-option" aria-pressed="false">light</button>
         </div>
       </footer>
     </div>
     <script is:inline>
       (function () {
-        var stored = localStorage.getItem('theme') || 'auto';
-        apply(stored);
+        function readTheme() {
+          try {
+            var v = localStorage.getItem('theme');
+            return v === 'dark' || v === 'light' ? v : 'auto';
+          } catch (e) {
+            return 'auto';
+          }
+        }
 
-        document.querySelectorAll('.theme-option').forEach(function (el) {
-          el.addEventListener('click', function (e) {
-            e.preventDefault();
-            var choice = this.getAttribute('data-theme-choice');
-            apply(choice);
+        function writeTheme(choice) {
+          try {
             localStorage.setItem('theme', choice);
-          });
-        });
+          } catch (e) {}
+        }
 
         function apply(choice) {
           if (choice === 'auto') {
@@ -72,9 +85,19 @@ const {
             document.documentElement.setAttribute('data-theme', choice);
           }
           document.querySelectorAll('.theme-option').forEach(function (el) {
-            el.classList.toggle('active', el.getAttribute('data-theme-choice') === choice);
+            el.setAttribute('aria-pressed', el.getAttribute('data-theme-choice') === choice ? 'true' : 'false');
           });
         }
+
+        apply(readTheme());
+
+        document.querySelectorAll('.theme-option').forEach(function (el) {
+          el.addEventListener('click', function () {
+            var choice = this.getAttribute('data-theme-choice');
+            apply(choice);
+            writeTheme(choice);
+          });
+        });
       })();
     </script>
   </body>
