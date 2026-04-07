@@ -19,3 +19,6 @@ pnpm-debug.log*
 
 # astro
 .astro/
+
+# playwright mcp screenshots
+.playwright-mcp/
