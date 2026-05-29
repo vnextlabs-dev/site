@@ -10,6 +10,14 @@ const {
   title,
   description = 'vNext Labs — Product development, technical leadership, and AI.',
 } = Astro.props;
+
+const pathname = Astro.url.pathname.replace(/\/$/, '');
+const pageLabels: Record<string, string> = {
+  '/projects': 'Projects',
+  '/services': 'Services',
+  '/connect': 'Connect',
+};
+const currentPage = pageLabels[pathname] ?? null;
 ---
 
 <!doctype html>
@@ -39,7 +47,15 @@ const {
   <body>
     <div class="page">
       <header>
-        <a href="/" class="site-name">vNext Labs</a>
+        <div class="breadcrumb">
+          <a href="/" class="site-name">vNext Labs</a>
+          {currentPage && (
+            <>
+              <span class="breadcrumb-sep" aria-hidden="true">/</span>
+              <span class="breadcrumb-current">{currentPage}</span>
+            </>
+          )}
+        </div>
         <nav aria-label="Primary">
           <a href="/projects">Projects</a>
           <a href="/services">Services</a>

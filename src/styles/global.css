@@ -136,6 +136,24 @@ header {
   color: var(--color-link-hover);
 }
 
+.breadcrumb {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+}
+
+.breadcrumb-sep {
+  font-family: var(--font-heading);
+  font-size: var(--size-lg);
+  color: var(--color-border);
+}
+
+.breadcrumb-current {
+  font-family: var(--font-heading);
+  font-size: var(--size-lg);
+  color: var(--color-text-muted);
+}
+
 nav {
   display: flex;
   gap: var(--space-sm);
