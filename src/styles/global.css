@@ -136,6 +136,24 @@ header {
   color: var(--color-link-hover);
 }
 
+.breadcrumb {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+}
+
+.breadcrumb-sep {
+  font-family: var(--font-heading);
+  font-size: var(--size-lg);
+  color: var(--color-border);
+}
+
+.breadcrumb-current {
+  font-family: var(--font-heading);
+  font-size: var(--size-lg);
+  color: var(--color-text-muted);
+}
+
 nav {
   display: flex;
   gap: var(--space-sm);
@@ -208,8 +226,29 @@ nav a {
   margin-top: var(--space-lg);
 }
 
+.section + .service-group {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-border);
+}
+
 .service-group h2 {
   margin-top: 0;
+}
+
+.badge-new {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.2em 0.55em;
+  margin-left: 0.5em;
+  background: var(--color-border);
+  color: var(--color-text-muted);
+  border-radius: 0.25em;
+  vertical-align: middle;
 }
 
 .service-list {

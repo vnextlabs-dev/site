@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    text { fill: #2c2c2c; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e0ddd6; }
+    }
+  </style>
+  <text x="50" y="82" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="110" font-weight="400">v</text>
+</svg>
